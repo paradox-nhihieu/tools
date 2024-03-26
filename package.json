@@ -3,11 +3,12 @@
 	"description": "Collection of functions for cleaning up and parsing SVG for Iconify project",
 	"author": "Vjacheslav Trushkin",
 	"license": "MIT",
+	"version": "4.0.2",
 	"bugs": "https://github.com/iconify/tools/issues",
 	"homepage": "https://github.com/iconify/tools",
 	"repository": {
 		"type": "git",
-		"url": "git://github.com/iconify/tools.git"
+		"url": "git://github.com/paradox-nhihieu/tools.git"
 	},
 	"workspaces": [
 		"@iconify/*",
