@@ -1,7 +1,8 @@
-import axios from 'axios';
+// import axios from 'axios';
 import { apiCacheKey, getAPICache, storeAPICache } from './cache';
 import type { APICacheOptions, APIQueryParams } from './types';
 import { axiosConfig, fetchCallbacks } from './config';
+import fetch from 'node-fetch-native'
 
 /**
  * Send API query
@@ -44,22 +45,26 @@ async function sendQuery(query: APIQueryParams): Promise<number | string> {
 	}
 
 	try {
-		const response = await axios.get(url, {
-			...axiosConfig,
+		const response = await fetch(url, {
 			headers,
-			responseType: 'text',
-		});
+		})
+		// const response = await axios.get(url, {
+		// 	...axiosConfig,
+		// 	headers,
+		// 	responseType: 'text',
+		// });
 
 		if (response.status !== 200) {
 			return fail(response.status);
 		}
-		if (typeof response.data !== 'string') {
+		if (typeof response.json !== 'function') {
 			return fail();
 		}
 
 		fetchCallbacks.onSuccess?.(url, query);
 
-		return response.data;
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-return
+		return response.json();
 	} catch (err) {
 		return fail();
 	}
